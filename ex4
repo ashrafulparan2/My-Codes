@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main()
+{
+    int i, j, k, n, count, square_root, current_number;
+    char is_prime[163842];
+    int prime_numbers[15001];
+
+    square_root = (int)sqrt(163841); // 163841 is the 1500th prime number
+
+    for(i = 2; i <= 163841; i++) is_prime[i] = '1';
+
+    for(i = 2; i <= square_root; i++)
+    {
+        if(is_prime[i] == '1')
+        {
+            current_number = i * i;
+
+            while(current_number <= 163841)
+            {
+                is_prime[current_number] = '0';
+                current_number += i;
+            }
+        }
+    }
+
+    prime_numbers[1] = 2;
+
+    for(j = 2, i = 3; i <= 163841; i += 2)
+    {
+        if(is_prime[i] == '1')
+        {
+            prime_numbers[j] = i;
+            j++;
+        }
+    }
+
+    scanf("%d", &k);
+
+    while(k--)
+    {
+        scanf("%d", &n);
+        printf("%d\n", prime_numbers[n]);
+    }
+
+    return 0;
+}
